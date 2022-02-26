@@ -177,6 +177,7 @@ describe("Given that I am a user on login page", () => {
         target: { value: inputData.password },
       });
       expect(inputPasswordUser.value).toBe(inputData.password);
+      
 
       const form = screen.getByTestId("form-admin");
 
