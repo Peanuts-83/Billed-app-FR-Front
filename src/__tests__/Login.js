@@ -76,6 +76,7 @@ describe("Given that I am a user on login page", () => {
         },
         writable: true,
       });
+      console.log(window.localStorage)
 
       // we have to mock navigation to test it
       const onNavigate = (pathname) => {
@@ -109,6 +110,10 @@ describe("Given that I am a user on login page", () => {
           status: "connected",
         })
       );
+
+      test('If user not in localStorage, should use createUser()', () => {
+      })
+
     });
 
     test("It should renders Bills page", () => {
@@ -177,7 +182,7 @@ describe("Given that I am a user on login page", () => {
         target: { value: inputData.password },
       });
       expect(inputPasswordUser.value).toBe(inputData.password);
-      
+
 
       const form = screen.getByTestId("form-admin");
 

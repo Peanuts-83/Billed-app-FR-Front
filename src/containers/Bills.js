@@ -8,7 +8,9 @@ export default class {
     this.onNavigate = onNavigate
     this.store = store
     const buttonNewBill = document.querySelector(`button[data-testid="btn-new-bill"]`)
-    if (buttonNewBill) buttonNewBill.addEventListener('click', this.handleClickNewBill)
+    if (buttonNewBill) {
+      buttonNewBill.addEventListener('click', this.handleClickNewBill)
+    }
     const iconEye = document.querySelectorAll(`div[data-testid="icon-eye"]`)
     if (iconEye) iconEye.forEach(icon => {
       icon.addEventListener('click', () => this.handleClickIconEye(icon))
@@ -23,12 +25,13 @@ export default class {
   handleClickIconEye = (icon) => {
     const billUrl = icon.getAttribute("data-bill-url")
     const imgWidth = Math.floor($('#modaleFile').width() * 0.5)
-    $('#modaleFile').find(".modal-body").html(`<div style='text-align: center;' class="bill-proof-container"><img width=${imgWidth} src=${billUrl} alt="Bill" /></div>`)
+    $('#modaleFile').find(".modal-body").html(`<div style='text-align: center;' class="bill-proof-container" data-testid="modalBody"><img width=${imgWidth} src=${billUrl} alt="Bill" /></div>`)
     $('#modaleFile').modal('show')
   }
 
   getBills = () => {
     if (this.store) {
+      //  console.log('STORE', this.store)
       return this.store
       .bills()
       .list()
@@ -52,7 +55,7 @@ export default class {
               }
             }
           })
-          console.log('length', bills.length)
+          // console.log('length', bills)
         return bills
       })
     }
