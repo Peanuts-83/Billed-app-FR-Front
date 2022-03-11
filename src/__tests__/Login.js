@@ -7,6 +7,10 @@ import Login from "../containers/Login.js";
 import { ROUTES } from "../constants/routes";
 import { fireEvent, screen } from "@testing-library/dom";
 
+const onNavigate = (pathname) => {
+  document.body.innerHTML = ROUTES({ pathname });
+};
+
 describe("Given that I am a user on login page", () => {
   describe("When I do not fill fields and I click on employee button Login In", () => {
     test("Then It should renders Login page", () => {
@@ -76,12 +80,11 @@ describe("Given that I am a user on login page", () => {
         },
         writable: true,
       });
-      console.log(window.localStorage)
 
       // we have to mock navigation to test it
-      const onNavigate = (pathname) => {
-        document.body.innerHTML = ROUTES({ pathname });
-      };
+      // const onNavigate = (pathname) => {
+      //   document.body.innerHTML = ROUTES({ pathname });
+      // };
 
       let PREVIOUS_LOCATION = "";
 
@@ -94,6 +97,7 @@ describe("Given that I am a user on login page", () => {
         PREVIOUS_LOCATION,
         store,
       });
+
 
       const handleSubmit = jest.fn(login.handleSubmitEmployee);
       login.login = jest.fn().mockResolvedValue({});
@@ -110,10 +114,6 @@ describe("Given that I am a user on login page", () => {
           status: "connected",
         })
       );
-
-      test('If user not in localStorage, should use createUser()', () => {
-      })
-
     });
 
     test("It should renders Bills page", () => {
