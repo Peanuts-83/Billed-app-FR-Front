@@ -2,14 +2,16 @@
  * @jest-environment jsdom
  */
 import '@testing-library/jest-dom'
+import userEvent from '@testing-library/user-event'
 import { screen, fireEvent, waitFor } from "@testing-library/dom"
+
+import router from "../app/Router.js";
+import BillsUI from "../views/BillsUI.js";
 import NewBillUI from "../views/NewBillUI.js"
 import NewBill from "../containers/NewBill.js"
 import mockedStore from "../__mocks__/store"
 import { localStorageMock } from "../__mocks__/localStorage.js";
 import { ROUTES, ROUTES_PATH } from "../constants/routes.js";
-import BillsUI from "../views/BillsUI.js";
-import userEvent from '@testing-library/user-event'
 
 
 const onNavigate = (pathname) => {
@@ -85,10 +87,6 @@ describe("Given I am connected as an employee", () => {
       fireEvent.change(screen.getByTestId('pct'), { target: { value: fakeBill.pct } })
       fireEvent.change(screen.getByTestId('commentary'), { target: { value: fakeBill.commentary } })
 
-      const event = {
-        fileUrl: fakeBill.fileUrl,
-        filename: fakeBill.filename
-      }
       form.addEventListener('submit', ((event) => newBill.handleSubmit(event)))
       userEvent.click(btnSubmitForm)
       await waitFor(() => screen.getByText('Mes notes de frais'))
@@ -98,6 +96,96 @@ describe("Given I am connected as an employee", () => {
       expect(screen.getByText('Mes notes de frais')).toBeTruthy()
     })
 
-    
+    describe("When an error occurs on API", () => {
+      beforeEach(() => {
+        jest.spyOn(mockedStore, "bills")
+        Object.defineProperty(
+          window,
+          'localStorage',
+          { value: localStorageMock }
+        )
+        window.localStorage.setItem('user', JSON.stringify({
+          type: 'Employee',
+          email: "a@a"
+        }))
+        document.body.innerHTML = ''
+        const root = document.createElement("div")
+        root.setAttribute("id", "root")
+        document.body.appendChild(root)
+        router()
+      })
+
+      it("fetches bills from an API and fails with 404 message error", async () => {
+        mockedStore.bills.mockImplementationOnce(() => {
+          return {
+            list: () => {
+              return Promise.reject(new Error("Erreur 404"))
+            }
+          }
+        })
+        document.body.innerHTML = BillsUI({ error: 'Erreur 404'})
+        const message = screen.getByText(/Erreur 404/)
+        expect(message).toBeTruthy()
+      })
+
+      it("fetches messages from an API and fails with 500 message error", async () => {
+        mockedStore.bills.mockImplementationOnce(() => {
+          return {
+            list: () => {
+              return Promise.reject(new Error("Erreur 500"))
+            }
+          }
+        })
+        document.body.innerHTML = BillsUI({ error: 'Erreur 500'})
+        const message = screen.getByText(/Erreur 500/)
+        expect(message).toBeTruthy()
+      })
+    })
+  })
+
+  describe("When an error occurs on API", () => {
+    beforeEach(() => {
+      jest.spyOn(mockedStore, "bills")
+      Object.defineProperty(
+        window,
+        'localStorage',
+        { value: localStorageMock }
+      )
+      window.localStorage.setItem('user', JSON.stringify({
+        type: 'Employee',
+        email: "a@a"
+      }))
+      document.body.innerHTML = ''
+      const root = document.createElement("div")
+      root.setAttribute("id", "root")
+      document.body.appendChild(root)
+      router()
+    })
+
+    it("fetches bills from an API and fails with 404 message error", async () => {
+      mockedStore.bills.mockImplementationOnce(() => {
+        return {
+          list: () => {
+            return Promise.reject(new Error("Erreur 404"))
+          }
+        }
+      })
+      document.body.innerHTML = BillsUI({ error: 'Erreur 404'})
+      const message = screen.getByText(/Erreur 404/)
+      expect(message).toBeTruthy()
+    })
+
+    it("fetches messages from an API and fails with 500 message error", async () => {
+      mockedStore.bills.mockImplementationOnce(() => {
+        return {
+          list: () => {
+            return Promise.reject(new Error("Erreur 500"))
+          }
+        }
+      })
+      document.body.innerHTML = BillsUI({ error: 'Erreur 500'})
+      const message = screen.getByText(/Erreur 500/)
+      expect(message).toBeTruthy()
+    })
   })
 })

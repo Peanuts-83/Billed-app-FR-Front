@@ -45,7 +45,7 @@ export default ({ data: bills, loading, error }) => {
   if (loading) {
     return LoadingPage()
   } else if (error) {
-    console.log('ERROR detected')
+    console.log('ERROR detected', error)
     return ErrorPage(error)
   }
 

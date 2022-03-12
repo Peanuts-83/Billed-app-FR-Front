@@ -63,7 +63,7 @@ describe("Given I am connected as an employee", () => {
     })
 
 
-    it('if corrupted store, should console.log(error for doc) & return {date: "hello", status: undefined}', async () => {
+    it('if corrupted store, should console.log(error) & return {date: "hello", status: undefined}', async () => {
       const corruptedStore = {
         bills() {
           return {
@@ -136,6 +136,52 @@ describe("Given I am connected as an employee", () => {
         expect(icon1).not.toHaveClass('active-icon')
         expect(icon2).toHaveClass('active-icon')
       })
+    })
+  })
+
+  describe("When an error occurs on API", () => {
+    beforeEach(() => {
+      jest.spyOn(mockedStore, "bills")
+      Object.defineProperty(
+        window,
+        'localStorage',
+        { value: localStorageMock }
+      )
+      window.localStorage.setItem('user', JSON.stringify({
+        type: 'Employee',
+        email: "a@a"
+      }))
+      document.body.innerHTML = ''
+      const root = document.createElement("div")
+      root.setAttribute("id", "root")
+      document.body.appendChild(root)
+      router()
+    })
+
+    it("fetches bills from an API and fails with 404 message error", async () => {
+      mockedStore.bills.mockImplementationOnce(() => {
+        return {
+          list: () => {
+            return Promise.reject(new Error("Erreur 404"))
+          }
+        }
+      })
+      document.body.innerHTML = BillsUI({ error: 'Erreur 404'})
+      const message = screen.getByText(/Erreur 404/)
+      expect(message).toBeTruthy()
+    })
+
+    it("fetches messages from an API and fails with 500 message error", async () => {
+      mockedStore.bills.mockImplementationOnce(() => {
+        return {
+          list: () => {
+            return Promise.reject(new Error("Erreur 500"))
+          }
+        }
+      })
+      document.body.innerHTML = BillsUI({ error: 'Erreur 500'})
+      const message = screen.getByText(/Erreur 500/)
+      expect(message).toBeTruthy()
     })
   })
 })
