@@ -59,133 +59,91 @@ describe("Given I am connected as an employee", () => {
       expect(window.alert).toHaveBeenCalledTimes(4)  // 2 times for each wrong file
     })
 
-    it('Submit handler should return newBill & navigate to Bills Page', async () => {
-      const fakeBill = {
-        type: 'Transports',
-        name: 'Vol Paris/Berlin',
-        date: '04-02-2021',
-        amount: '1500',
-        vat: '300',
-        pct: '150',
-        commentary: 'vol 1ere classe',
-        filename: 'flightBill',
-        fileUrl: 'C:\\fakepath\\flightBill.jpg'
-      }
 
-      document.body.innerHTML = NewBillUI()
-      const newBill = new NewBill({ document, onNavigate, store: mockedStore, localStorage: window.localStorage })
-      const spyHandleSubmit = jest.spyOn(newBill, 'handleSubmit')
-      const form = screen.getByTestId('form-new-bill')
-      const btnSubmitForm = form.querySelector('#btn-send-bill')
-      const spyUpdateBill = jest.spyOn(newBill, 'updateBill')
-
-      fireEvent.change(screen.getByTestId('expense-type'), { target: { value: fakeBill.type } })
-      fireEvent.change(screen.getByTestId('expense-name'), { target: { value: fakeBill.name } })
-      fireEvent.change(screen.getByTestId('datepicker'), { target: { value: fakeBill.date } })
-      fireEvent.change(screen.getByTestId('amount'), { target: { value: fakeBill.amount } })
-      fireEvent.change(screen.getByTestId('vat'), { target: { value: fakeBill.vat } })
-      fireEvent.change(screen.getByTestId('pct'), { target: { value: fakeBill.pct } })
-      fireEvent.change(screen.getByTestId('commentary'), { target: { value: fakeBill.commentary } })
-
-      form.addEventListener('submit', ((event) => newBill.handleSubmit(event)))
-      userEvent.click(btnSubmitForm)
-      await waitFor(() => screen.getByText('Mes notes de frais'))
-
-      expect(spyHandleSubmit).toHaveBeenCalled()
-      expect(spyUpdateBill).toHaveBeenCalled()
-      expect(screen.getByText('Mes notes de frais')).toBeTruthy()
-    })
-
-    describe("When an error occurs on API", () => {
-      beforeEach(() => {
-        jest.spyOn(mockedStore, "bills")
-        Object.defineProperty(
-          window,
-          'localStorage',
-          { value: localStorageMock }
-        )
-        window.localStorage.setItem('user', JSON.stringify({
-          type: 'Employee',
-          email: "a@a"
-        }))
-        document.body.innerHTML = ''
-        const root = document.createElement("div")
-        root.setAttribute("id", "root")
-        document.body.appendChild(root)
-        router()
-      })
-
-      it("fetches bills from an API and fails with 404 message error", async () => {
-        mockedStore.bills.mockImplementationOnce(() => {
-          return {
-            list: () => {
-              return Promise.reject(new Error("Erreur 404"))
-            }
-          }
-        })
-        document.body.innerHTML = BillsUI({ error: 'Erreur 404'})
-        const message = screen.getByText(/Erreur 404/)
-        expect(message).toBeTruthy()
-      })
-
-      it("fetches messages from an API and fails with 500 message error", async () => {
-        mockedStore.bills.mockImplementationOnce(() => {
-          return {
-            list: () => {
-              return Promise.reject(new Error("Erreur 500"))
-            }
-          }
-        })
-        document.body.innerHTML = BillsUI({ error: 'Erreur 500'})
-        const message = screen.getByText(/Erreur 500/)
-        expect(message).toBeTruthy()
-      })
-    })
-  })
-
-  describe("When an error occurs on API", () => {
-    beforeEach(() => {
-      jest.spyOn(mockedStore, "bills")
-      Object.defineProperty(
-        window,
-        'localStorage',
-        { value: localStorageMock }
-      )
-      window.localStorage.setItem('user', JSON.stringify({
-        type: 'Employee',
-        email: "a@a"
-      }))
-      document.body.innerHTML = ''
-      const root = document.createElement("div")
-      root.setAttribute("id", "root")
-      document.body.appendChild(root)
-      router()
-    })
-
-    it("fetches bills from an API and fails with 404 message error", async () => {
-      mockedStore.bills.mockImplementationOnce(() => {
-        return {
-          list: () => {
-            return Promise.reject(new Error("Erreur 404"))
-          }
+    describe('POST integration test', () => {
+      it('Submit handler should return newBill & navigate to Bills Page', async () => {
+        const fakeBill = {
+          type: 'Transports',
+          name: 'Vol Paris/Berlin',
+          date: '04-02-2021',
+          amount: '1500',
+          vat: '300',
+          pct: '150',
+          commentary: 'vol 1ere classe',
+          filename: 'flightBill',
+          fileUrl: 'C:\\fakepath\\flightBill.jpg'
         }
-      })
-      document.body.innerHTML = BillsUI({ error: 'Erreur 404'})
-      const message = screen.getByText(/Erreur 404/)
-      expect(message).toBeTruthy()
-    })
 
-    it("fetches messages from an API and fails with 500 message error", async () => {
-      mockedStore.bills.mockImplementationOnce(() => {
-        return {
-          list: () => {
-            return Promise.reject(new Error("Erreur 500"))
-          }
-        }
+        document.body.innerHTML = NewBillUI()
+        const newBill = new NewBill({ document, onNavigate, store: mockedStore, localStorage: window.localStorage })
+        const spyHandleSubmit = jest.spyOn(newBill, 'handleSubmit')
+        const form = screen.getByTestId('form-new-bill')
+        const btnSubmitForm = form.querySelector('#btn-send-bill')
+        const spyUpdateBill = jest.spyOn(newBill, 'updateBill')
+
+        fireEvent.change(screen.getByTestId('expense-type'), { target: { value: fakeBill.type } })
+        fireEvent.change(screen.getByTestId('expense-name'), { target: { value: fakeBill.name } })
+        fireEvent.change(screen.getByTestId('datepicker'), { target: { value: fakeBill.date } })
+        fireEvent.change(screen.getByTestId('amount'), { target: { value: fakeBill.amount } })
+        fireEvent.change(screen.getByTestId('vat'), { target: { value: fakeBill.vat } })
+        fireEvent.change(screen.getByTestId('pct'), { target: { value: fakeBill.pct } })
+        fireEvent.change(screen.getByTestId('commentary'), { target: { value: fakeBill.commentary } })
+
+        form.addEventListener('submit', ((event) => newBill.handleSubmit(event)))
+        userEvent.click(btnSubmitForm)
+        await waitFor(() => screen.getByText('Mes notes de frais'))
+
+        expect(spyHandleSubmit).toHaveBeenCalled()
+        expect(spyUpdateBill).toHaveBeenCalled()
+        expect(screen.getByText('Mes notes de frais')).toBeTruthy()
       })
-      document.body.innerHTML = BillsUI({ error: 'Erreur 500'})
-      const message = screen.getByText(/Erreur 500/)
-      expect(message).toBeTruthy()
+
+
+      describe("When an error occurs on API", () => {
+        beforeEach(() => {
+          jest.spyOn(mockedStore, "bills")
+          Object.defineProperty(
+            window,
+            'localStorage',
+            { value: localStorageMock }
+          )
+          window.localStorage.setItem('user', JSON.stringify({
+            type: 'Employee',
+            email: "a@a"
+          }))
+          document.body.innerHTML = ''
+          const root = document.createElement("div")
+          root.setAttribute("id", "root")
+          document.body.appendChild(root)
+          router()
+        })
+
+        it("fetches bills from an API and fails with 404 message error", async () => {
+          mockedStore.bills.mockImplementationOnce(() => {
+            return {
+              list: () => {
+                return Promise.reject(new Error("Erreur 404"))
+              }
+            }
+          })
+          document.body.innerHTML = BillsUI({ error: 'Erreur 404'})
+          const message = screen.getByText(/Erreur 404/)
+          expect(message).toBeTruthy()
+        })
+
+        it("fetches messages from an API and fails with 500 message error", async () => {
+          mockedStore.bills.mockImplementationOnce(() => {
+            return {
+              list: () => {
+                return Promise.reject(new Error("Erreur 500"))
+              }
+            }
+          })
+          document.body.innerHTML = BillsUI({ error: 'Erreur 500'})
+          const message = screen.getByText(/Erreur 500/)
+          expect(message).toBeTruthy()
+        })
+      })
     })
   })
 })
