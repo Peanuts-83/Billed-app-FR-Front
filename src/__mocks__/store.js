@@ -1,4 +1,5 @@
 const mockedBills = {
+  // GET mock
   list() {
     return Promise.resolve([{
       "id": "47qAXb6fIm2zOKkLzMro",
@@ -62,9 +63,11 @@ const mockedBills = {
     }])
 
   },
+  // PUT mock
   create(bill) {
     return Promise.resolve({ fileUrl: 'https://localhost:3456/images/test.jpg', key: '1234' })
   },
+  // POST mock
   update(bill) {
     return Promise.resolve({
       "id": "47qAXb6fIm2zOKkLzMro",
