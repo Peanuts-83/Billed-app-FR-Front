@@ -1,8 +1,8 @@
-[L'application testée](/#application)
+[L'application testée](#application)
 
-[Les tests avec Jest](/#jest)
+[Les tests avec Jest](#jest)
 
-[Les tests End-to-End avec Cypress](/#cypress)
+[Les tests End-to-End avec Cypress](#cypress)
 
 
 # [L'architecture du projet :](#application)
