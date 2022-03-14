@@ -92,3 +92,23 @@ mot de passe : admin
 utilisateur : employee@test.tld
 mot de passe : employee
 ```
+
+&nbsp;
+# Tests End-to-End avec le framework Cypress
+J'ai à titre personnel développé une suite de tests concernant la partie "employé" du projet, avec le <a href="https://www.cypress.io/" target="_blank">framework de test Cypress</a> qui est un framework all-in-one facile à utiliser, et qui dispose d'une représentation graphique de la réalisation des tests ( gros avantage pour un débutant ! ). La syntaxe de programmation, proche de celle de Jest, est fortement sémantique et très intuitive.
+
+&nbsp;
+<a href="https://docs.cypress.io/guides/getting-started/installing-cypress#Opening-Cypress" target="_blank">Le lancement du framework</a> se fait avec :
+* Vous disposez de npx :
+```
+npx cypress open
+```
+* Vous ne disposez pas de npx :
+```
+./node_modules/.bin/cypress open
+```
+On peut choisir en haut à droite de la fenêtre qui s'ouvre le navigateur de test qu'on désire utiliser (firefox, chrome, ...).
+Il suffit ensuite de sélectionner le seul test disponible : *End-to-End.spec.js*
+
+&nbsp;
+Ce fichier de test se trouve ici : *./cypress/integration/End-to-End.spec.js*
