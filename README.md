@@ -1,11 +1,11 @@
-[L'application testée](#application)
+[L'application testée](#larchitecture-du-projet-)
 
-[Les tests avec Jest](#jest)
+[Les tests avec Jest](#les-tests-jest)
 
-[Les tests End-to-End avec Cypress](#cypress)
+[Les tests End-to-End avec Cypress](#les-tests-end-to-end-avec-le-framework-cypress)
 
 
-# [L'architecture du projet :](#application)
+# [L'architecture du projet :](#larchitecture-du-projet-)
 Ce projet, dit frontend, est connecté à un service API backend que vous devez aussi lancer en local.
 
 Le projet backend se trouve ici: https://github.com/OpenClassrooms-Student-Center/Billed-app-FR-back
@@ -65,7 +65,7 @@ $ live-server
 Puis allez à l'adresse : `http://127.0.0.1:8080/`
 
 &nbsp;
-# [Les tests Jest](#jest)
+# [Les tests Jest](#les-tests-jest)
 ## Comment lancer tous les tests en local avec Jest ?
 
 ```
@@ -101,7 +101,7 @@ mot de passe : employee
 ```
 
 &nbsp;
-# [Les tests End-to-End avec le framework Cypress](#cypress)
+# [Les tests End-to-End avec le framework Cypress](#les-tests-end-to-end-avec-le-framework-cypress)
 J'ai à titre personnel développé une suite de tests concernant la partie "employé" du projet, avec le <a href="https://www.cypress.io/" target="_blank">framework de test Cypress</a> qui est un framework all-in-one facile à utiliser, et qui dispose d'une représentation graphique de la réalisation des tests ( gros avantage pour un débutant ! ). La syntaxe de programmation, proche de celle de Jest, est fortement sémantique et très intuitive.
 
 &nbsp;
