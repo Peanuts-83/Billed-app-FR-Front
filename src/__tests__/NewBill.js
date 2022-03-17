@@ -61,7 +61,7 @@ describe("Given I am connected as an employee", () => {
 
 
     describe('POST integration test', () => {
-      it.only('Submit handler should return newBill & navigate to Bills Page', async () => {
+      it('Submit handler should return newBill & navigate to Bills Page', async () => {
         const fakeBill = {
           type: 'Transports',
           name: 'Vol Paris/Berlin',
