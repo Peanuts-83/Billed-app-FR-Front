@@ -7,12 +7,16 @@
     "setupFiles": [
       "./setup-jest.js"
     ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/cypress/"
+    ],
     "collectCoverageFrom": [
       "**/*.{js,jsx}",
       "!**/app/**",
       "!**/assets/**",
       "!**/external/**",
       "!**/fixtures/**",
+      "!**/cypress/**",
       "!**/lcov-report/**"
     ]
   },
@@ -28,6 +32,7 @@
     "@testing-library/jest-dom": "^5.11.0",
     "@testing-library/user-event": "^12.0.11",
     "@types/jest": "^27.4.1",
+    "@types/jquery": "^3.5.14",
     "babel-jest": "^26.1.0",
     "cypress": "^9.5.1",
     "eslint-plugin-jest-dom": "^4.0.1",
