@@ -20,7 +20,7 @@ This project, called frontend, is connected to a backend API service that you mu
 
 The backend project can be found here:
 
- https://github.com/OpenClassrooms-Student-Center/Billed-app-FR-back
+ https://github.com/Peanuts-83/Billed-app-FR-Back
 
 ## Organize your workspace :
 
