@@ -1,31 +1,42 @@
-[L'application testée](#larchitecture-du-projet-)
+[![forthebadge](https://forthebadge.com/images/badges/validated-html5.svg)](https://developer.mozilla.org/fr/docs/Glossary/HTML5)
+[![forthebadge](https://forthebadge.com/images/badges/uses-css.svg)](https://developer.mozilla.org/fr/docs/Web/CSS)
+[![forthebadge](./tested-jest.svg)](https://jestjs.io/)
+[![forthebadge](./tested-cypress.svg)](https://www.cypress.io/)
+[![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)](https://javascript.info/)
 
-[Les tests avec Jest](#les-tests-jest)
+![Application interface](./vignette.png)
+[![Project's presentation SlideShow](./pdf.png)](./Slide_P9.pdf) - SlideShow
+[![Project's presentation SlideShow](./pdf.png)](./End-to-end_plan_test.pdf) - End-to-end plan test
 
-[Les tests End-to-End avec Cypress](#les-tests-end-to-end-avec-le-framework-cypress)
+[Application setup](#larchitecture-du-projet-)
+
+[JEST Tests](#les-tests-jest)
+
+[End-to-end CYPRESS Tests](#les-tests-end-to-end-avec-le-framework-cypress)
 
 
-# [L'architecture du projet :](#larchitecture-du-projet-)
-Ce projet, dit frontend, est connecté à un service API backend que vous devez aussi lancer en local.
+# [Application setup :](#larchitecture-du-projet-)
+This project, called frontend, is connected to a backend API service that you must also launch locally.
 
-Le projet backend se trouve ici: https://github.com/OpenClassrooms-Student-Center/Billed-app-FR-back
+The backend project can be found here:
 
-## Organiser son espace de travail :
-Pour une bonne organization, vous pouvez créer un dossier bill-app dans lequel vous allez cloner le projet backend et par la suite, le projet frontend:
+ https://github.com/OpenClassrooms-Student-Center/Billed-app-FR-back
 
-Clonez le projet backend dans le dossier bill-app :
+## Organize your workspace :
+
+
+For a good organization, you can create a bill-app folder in which you will clone the backend project and later on, the frontend project.
+
+**Clone the back-end project** into the bill-app folder:
+
 ```
-$ git clone https://github.com/OpenClassrooms-Student-Center/Billed-app-FR-Back.git
+$ git clone https://github.com/Peanuts-83/Billed-app-FR-Back.git
 ```
 
-```
-bill-app/
-   - Billed-app-FR-Back
-```
+**Clone the front-end project** into the bill-app folder:
 
-Clonez le projet frontend dans le dossier bill-app :
 ```
-$ git clone https://github.com/OpenClassrooms-Student-Center/Billed-app-FR-Front.git
+$ git clone https://github.com/Peanuts-83/Billed-app-FR-Front.git
 ```
 
 ```
@@ -34,88 +45,101 @@ bill-app/
    - Billed-app-FR-Front
 ```
 
-## Comment lancer l'application en local ?
+## How to use the application localy ?
 
-### étape 1 - Lancer le backend :
+### Step 1 - Launch back-end API :
 
-Suivez les indications dans le README du projet backend.
+Follow the instructions on the back-end's README.
 
-### étape 2 - Lancer le frontend :
+### Step 2 - Launch front-end application :
 
-Allez au repo cloné :
+Go into the local repository :
 ```
 $ cd Billed-app-FR-Front
 ```
 
-Installez les packages npm (décrits dans `package.json`) :
+Install dependencies :
 ```
 $ npm install
 ```
 
-Installez live-server pour lancer un serveur local :
+Install live-server to enable local server :
 ```
 $ npm install -g live-server
 ```
 
-Lancez l'application :
+Launch the application :
 ```
 $ live-server
 ```
 
-Puis allez à l'adresse : `http://127.0.0.1:8080/`
+The application URL is : `http://127.0.0.1:8080/`
 
 &nbsp;
-# [Les tests Jest](#les-tests-jest)
-## Comment lancer tous les tests en local avec Jest ?
+# [JEST Tests](#les-tests-jest)
+
+Tests coverage objectives are 80% - Objectives exceeded : 96.05% reached.
+
+![Final test coverage](./coverage.png)
+
+## HOW to run all JEST Tests locally ?
 
 ```
 $ npm run test
 ```
 
-## Comment lancer un seul test ?
+## How to run a single test ?
 
-Installez jest-cli :
+Install jest-cli :
 
 ```
 $npm i -g jest-cli
 $jest src/__tests__/your_test_file.js
 ```
 
-## Comment voir la couverture de test ?
+## How to display tests coverage ?
 
 `http://127.0.0.1:8080/coverage/lcov-report/`
 
-## Comptes et utilisateurs :
+## Accounts & users
 
-Vous pouvez vous connecter en utilisant les comptes:
+You can use the application using this accounts:
 
-### administrateur :
+### admin :
 ```
-utilisateur : admin@test.tld
-mot de passe : admin
+user : admin@test.tld
+password : admin
 ```
-### employé :
+### employee :
 ```
-utilisateur : employee@test.tld
-mot de passe : employee
+user : employee@test.tld
+password : employee
 ```
 
-&nbsp;
-# [Les tests End-to-End avec le framework Cypress](#les-tests-end-to-end-avec-le-framework-cypress)
-J'ai à titre personnel développé une suite de tests concernant la partie "employé" du projet, avec le <a href="https://www.cypress.io/" target="_blank">framework de test Cypress</a> qui est un framework all-in-one facile à utiliser, et qui dispose d'une représentation graphique de la réalisation des tests ( gros avantage pour un débutant ! ). La syntaxe de programmation, proche de celle de Jest, est fortement sémantique et très intuitive.
+The test files are here : [*./src/__tests__/*](./src/__tests__/)
 
 &nbsp;
-<a href="https://docs.cypress.io/guides/getting-started/installing-cypress#Opening-Cypress" target="_blank">Le lancement du framework</a> se fait avec :
-* Vous disposez de npx :
+# [End-to-end CYPRESS Tests](#les-tests-end-to-end-avec-le-framework-cypress)
+
+![Cypress testing](./cypress.png
+)
+
+I personally developed a test suite for the "employee" part of the project, with the [Cypress test framework](https://www.cypress.io/) which is an easy-to-use all-in-one framework, and which has a graphical representation of the execution of the tests (big advantage for a beginner!). The programming syntax, close to that of Jest, is strongly semantic and very intuitive.
+
+
+&nbsp;
+Launch CYPRESS
+* You can use npx :
 ```
 npx cypress open
 ```
-* Vous ne disposez pas de npx :
+* Without npx :
 ```
 ./node_modules/.bin/cypress open
 ```
-On peut choisir en haut à droite de la fenêtre qui s'ouvre le navigateur de test qu'on désire utiliser (firefox, chrome, ...).
-Il suffit ensuite de sélectionner le seul test disponible : *End-to-End.spec.js*
+You can choose at the top right of the window that opens the test browser you want to use (firefox, chrome, ...).
+Then just select the only test available: *End-to-End.spec.js*
+
 
 &nbsp;
-Ce fichier de test se trouve ici : *./cypress/integration/End-to-End.spec.js*
+The test file is here : [*./cypress/integration/End-to-End.spec.js*](./cypress/integration/End-to-End.spec.js)
