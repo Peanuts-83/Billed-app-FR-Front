@@ -121,8 +121,7 @@ The test files are here : [*./src/__tests__/*](./src/__tests__/)
 &nbsp;
 # End-to-end CYPRESS Tests
 
-![Cypress testing](./cypress.png
-)
+[![Cypress testing](./cypress.png)](./cypress_E2E.png)
 
 I personally developed a test suite for the "employee" part of the project, with the [Cypress test framework](https://www.cypress.io/) which is an easy-to-use all-in-one framework, and which has a graphical representation of the execution of the tests (big advantage for a beginner!). The programming syntax, close to that of Jest, is strongly semantic and very intuitive.
 
