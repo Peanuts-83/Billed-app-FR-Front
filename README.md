@@ -4,18 +4,18 @@
 [![forthebadge](./tested-cypress.svg)](https://www.cypress.io/)
 [![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)](https://javascript.info/)
 
-![Application interface](./vignette.png)
+[![Application interface](./vignette.png)](./interfaceBilled.png)
 [![Project's presentation SlideShow](./pdf.png)](./Slide_P9.pdf) - SlideShow
 [![Project's presentation SlideShow](./pdf.png)](./End-to-end_plan_test.pdf) - End-to-end plan test
 
-[Application setup](#larchitecture-du-projet-)
+[Application setup](#application-setup)
 
-[JEST Tests](#les-tests-jest)
+[JEST Tests](#jest-tests)
 
-[End-to-end CYPRESS Tests](#les-tests-end-to-end-avec-le-framework-cypress)
+[End-to-end CYPRESS Tests](#end-to-end-cypress-tests)
 
 
-# [Application setup :](#larchitecture-du-projet-)
+# Application setup
 This project, called frontend, is connected to a backend API service that you must also launch locally.
 
 The backend project can be found here:
@@ -76,7 +76,7 @@ $ live-server
 The application URL is : `http://127.0.0.1:8080/`
 
 &nbsp;
-# [JEST Tests](#les-tests-jest)
+# JEST Tests
 
 Tests coverage objectives are 80% - Objectives exceeded : 96.05% reached.
 
@@ -119,7 +119,7 @@ password : employee
 The test files are here : [*./src/__tests__/*](./src/__tests__/)
 
 &nbsp;
-# [End-to-end CYPRESS Tests](#les-tests-end-to-end-avec-le-framework-cypress)
+# End-to-end CYPRESS Tests
 
 ![Cypress testing](./cypress.png
 )
